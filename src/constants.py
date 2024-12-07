@@ -11,6 +11,7 @@ LOG_FILE = LOG_DIR / 'parser.log'
 
 # Форматы даты и времени
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
+DT_FORMAT = '%d.%m.%Y %H:%M:%S'
 
 # Параметры загрузки
 DOWNLOADS = 'downloads'
