@@ -15,14 +15,12 @@ from constants import (
 
 def control_output(results, cli_args):
     output = cli_args.output
-
-    output_functions = {
-        FORMAT_PRETTY: pretty_output,
-        FORMAT_FILE: file_output
-    }
-
-    output_function = output_functions.get(output, default_output)
-    output_function(results, cli_args)
+    if output == FORMAT_PRETTY:
+        pretty_output(results)
+    elif output == FORMAT_FILE:
+        file_output(results, cli_args)
+    else:
+        default_output(results)
 
 
 def default_output(results):
