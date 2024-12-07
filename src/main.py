@@ -9,7 +9,7 @@ from configs import configure_argument_parser, configure_logging
 from constants import BASE_DIR, DOWNLOADS, MAIN_DOC_URL, PEP_URL
 from exceptions import NoVersionsFoundError
 from outputs import control_output
-from utils import get_response, find_tag, parse_response
+from utils import find_tag, parse_response
 
 
 def whats_new(session):
@@ -17,7 +17,7 @@ def whats_new(session):
     error_messages = []
 
     try:
-        soup = parse_response(session, whats_new_url)  # Передаем session и url
+        soup = parse_response(session, whats_new_url)
     except RuntimeError as e:
         error_messages.append(f'Ошибка при парсинге {whats_new_url}: {e}')
         return []
@@ -36,7 +36,7 @@ def whats_new(session):
         version_link = urljoin(whats_new_url, href)
         soup = parse_response(session, version_link)
         try:
-            soup = parse_response(session, version_link)  # Передаем session и url
+            soup = parse_response(session, version_link)
         except RuntimeError as e:
             error_messages.append(f'Ошибка при парсинге {version_link}: {e}')
             continue
@@ -56,7 +56,7 @@ def latest_versions(session):
     error_messages = []
 
     try:
-        soup = parse_response(session, MAIN_DOC_URL)  # Передаем session и url
+        soup = parse_response(session, MAIN_DOC_URL)
     except RuntimeError as e:
         error_messages.append(f'Ошибка при парсинге {MAIN_DOC_URL}: {e}')
         return []
@@ -94,7 +94,7 @@ def download(session):
     downloads_url = urljoin(MAIN_DOC_URL, 'download.html')
 
     try:
-        soup = parse_response(session, downloads_url)  # Передаем session и url
+        soup = parse_response(session, downloads_url)
     except RuntimeError as e:
         error_messages.append(f'Ошибка при парсинге {downloads_url}: {e}')
         return
@@ -160,7 +160,7 @@ def pep(session):
         pep_link = urljoin(PEP_URL, a_tag['href'])
 
         try:
-            soup = parse_response(session, pep_link)  # Передаем session и url
+            soup = parse_response(session, pep_link)
         except RuntimeError as e:
             error_messages.append(f'Ошибка при парсинге {pep_link}: {e}')
             continue
