@@ -7,16 +7,10 @@ from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 from configs import configure_argument_parser, configure_logging
-from constants import BASE_DIR, MAIN_DOC_URL, PEP_URL, DOWNLOADS
+from constants import BASE_DIR, DOWNLOADS, MAIN_DOC_URL, PEP_URL
 from exceptions import NoVersionsFoundError
 from outputs import control_output
-from utils import get_response, find_tag
-
-
-def parse_response(response):
-    if response is None:
-        return None
-    return BeautifulSoup(response.text, 'lxml')
+from utils import get_response, find_tag, parse_response
 
 
 def whats_new(session):

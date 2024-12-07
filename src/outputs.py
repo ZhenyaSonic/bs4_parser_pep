@@ -7,9 +7,9 @@ from prettytable import PrettyTable
 from constants import (
     BASE_DIR,
     DATETIME_FORMAT,
-    RESULTS,
+    FORMAT_FILE,
     FORMAT_PRETTY,
-    FORMAT_FILE
+    RESULTS,
 )
 
 
