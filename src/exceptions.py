@@ -4,5 +4,3 @@ class ParserFindTagException(Exception):
 
 class NoVersionsFoundError(Exception):
     """Исключение, возникающее, когда не найдены версии документации."""
-    def __init__(self, message):
-        super().__init__(message)
