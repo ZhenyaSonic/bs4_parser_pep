@@ -26,5 +26,6 @@ def find_tag(soup, tag, attrs=None):
     return searched_tag
 
 
-def parse_response(response, parser='lxml'):
+def parse_response(session, url, encoding='utf-8', parser='lxml'):
+    response = get_response(session, url)
     return BeautifulSoup(response.text, parser)
