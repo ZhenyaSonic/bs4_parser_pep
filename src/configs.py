@@ -3,7 +3,6 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 from constants import (
-    BASE_DIR,
     LOG_FORMAT,
     LOG_DIR,
     LOG_FILE,
