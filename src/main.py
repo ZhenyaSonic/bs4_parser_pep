@@ -82,7 +82,6 @@ def download(session):
     error_messages = []
     downloads_url = urljoin(MAIN_DOC_URL, 'download.html')
 
-
     soup = parse_response(session, downloads_url)
     table_tag = find_tag(soup, 'table', attrs={'class': 'docutils'})
     pdf_a4_tag = find_tag(table_tag, 'a',
