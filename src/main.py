@@ -16,12 +16,7 @@ def whats_new(session):
     whats_new_url = urljoin(MAIN_DOC_URL, 'whatsnew/')
     error_messages = []
 
-    try:
-        soup = parse_response(session, whats_new_url)
-    except RuntimeError as e:
-        error_messages.append(f'Ошибка при парсинге {whats_new_url}: {e}')
-        return []
-
+    soup = parse_response(session, whats_new_url)
     main_div = find_tag(soup, 'section', attrs={'id': 'what-s-new-in-python'})
     div_with_ul = find_tag(main_div, 'div', attrs={'class': 'toctree-wrapper'})
     sections_by_python = div_with_ul.find_all(
@@ -34,7 +29,6 @@ def whats_new(session):
         version_a_tag = find_tag(section, 'a')
         href = version_a_tag['href']
         version_link = urljoin(whats_new_url, href)
-        soup = parse_response(session, version_link)
         try:
             soup = parse_response(session, version_link)
         except RuntimeError as e:
@@ -55,12 +49,7 @@ def whats_new(session):
 def latest_versions(session):
     error_messages = []
 
-    try:
-        soup = parse_response(session, MAIN_DOC_URL)
-    except RuntimeError as e:
-        error_messages.append(f'Ошибка при парсинге {MAIN_DOC_URL}: {e}')
-        return []
-
+    soup = parse_response(session, MAIN_DOC_URL)
     sidebar = find_tag(soup, 'div', attrs={'class': 'sphinxsidebarwrapper'})
     ul_tags = sidebar.find_all('ul')
     for ul in ul_tags:
@@ -93,12 +82,8 @@ def download(session):
     error_messages = []
     downloads_url = urljoin(MAIN_DOC_URL, 'download.html')
 
-    try:
-        soup = parse_response(session, downloads_url)
-    except RuntimeError as e:
-        error_messages.append(f'Ошибка при парсинге {downloads_url}: {e}')
-        return
 
+    soup = parse_response(session, downloads_url)
     table_tag = find_tag(soup, 'table', attrs={'class': 'docutils'})
     pdf_a4_tag = find_tag(table_tag, 'a',
                           attrs={'href': re.compile(r'.+pdf-a4\.zip$')})
@@ -121,12 +106,7 @@ def pep(session):
     error_messages = []
     amount_statuses = []
 
-    try:
-        soup = parse_response(session, PEP_URL)
-    except RuntimeError as e:
-        error_messages.append(f'Ошибка при парсинге {PEP_URL}: {e}')
-        return []
-
+    soup = parse_response(session, PEP_URL)
     numerical_section = find_tag(
         soup,
         'section',
@@ -165,7 +145,6 @@ def pep(session):
             error_messages.append(f'Ошибка при парсинге {pep_link}: {e}')
             continue
 
-        soup = parse_response(session, PEP_URL)
         abbr_tag = find_tag(soup, 'abbr')
         status_on_page = abbr_tag.text
 
